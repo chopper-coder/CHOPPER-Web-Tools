@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7ec">
+  <meta name="description" content="CHOPPER 網頁工具作品集：批次文件文字取代、圖片紀錄整理、PDF 編輯、兒童書寫練習、數據圖表產生等實用網頁工具。">
+  <title>CHOPPER 網頁工具作品集</title>
+
+  <style>
+    :root{
+      --bg:#fffaf3;
+      --paper:#fffefb;
+      --paper-2:#fff8ee;
+      --brown:#5c3928;
+      --brown-2:#7a513c;
+      --muted:#8f7868;
+      --line:#efd9c3;
+      --peach:#f6b8a7;
+      --pink:#f7c5ca;
+      --mint:#bcdac8;
+      --blue:#bcd9e8;
+      --yellow:#f3d28a;
+      --shadow:0 14px 36px rgba(116,78,49,.12);
+      --shadow-soft:0 8px 22px rgba(116,78,49,.09);
+      --radius-xl:30px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:
+        "Noto Sans TC","PingFang TC","Microsoft JhengHei",
+        system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--brown);
+      background:
+        radial-gradient(circle at 10% 5%, rgba(247,197,202,.22), transparent 22%),
+        radial-gradient(circle at 92% 18%, rgba(188,218,200,.20), transparent 20%),
+        linear-gradient(180deg,#fffaf3 0%,#fffdf9 55%,#fff7eb 100%);
+      line-height:1.65;
+    }
+
+    a{color:inherit}
+    button,a{tap-highlight-color:transparent;-webkit-tap-highlight-color:transparent}
+    img{display:block;max-width:100%}
+
+    .shell{
+      width:min(calc(100% - 28px),var(--max));
+      margin-inline:auto;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      padding:14px 0 8px;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(180deg,rgba(255,250,243,.94),rgba(255,250,243,.78),transparent);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      min-height:66px;
+      padding:10px 16px 10px 20px;
+      background:rgba(255,254,251,.92);
+      border:1px solid rgba(239,217,195,.9);
+      border-radius:24px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:0;
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+
+    .brand-paw{
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      border-radius:15px;
+      background:linear-gradient(145deg,#fff2e8,#ffe3df);
+      font-size:24px;
+      box-shadow:inset 0 0 0 1px rgba(246,184,167,.5);
+    }
+
+    .brand-text{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-size:18px;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      padding:10px 14px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:800;
+      color:var(--brown-2);
+      transition:.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible{
+      background:#fff1e8;
+      transform:translateY(-1px);
+      outline:none;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      padding:14px 0 22px;
+    }
+
+    .hero-card{
+      overflow:hidden;
+      border-radius:32px;
+      border:1px solid var(--line);
+      background:var(--paper);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image{
+      width:100%;
+      aspect-ratio:3/1;
+      object-fit:cover;
+      background:#fff6ec;
+    }
+
+    .hero-copy{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:24px;
+      align-items:center;
+      padding:24px 28px 26px;
+      background:
+        radial-gradient(circle at right top,rgba(188,218,200,.20),transparent 35%),
+        linear-gradient(180deg,#fffefb,#fff9f1);
+    }
+
+    .eyebrow{
+      margin:0 0 4px;
+      color:#d27b6b;
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.12em;
+    }
+
+    .hero-copy h1{
+      margin:0;
+      font-size:clamp(27px,4vw,48px);
+      line-height:1.2;
+      letter-spacing:.01em;
+    }
+
+    .hero-copy p{
+      margin:10px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .hero-stat{
+      min-width:140px;
+      padding:16px 18px;
+      border:1px dashed #eab8a9;
+      border-radius:20px;
+      background:#fff8f3;
+      text-align:center;
+    }
+
+    .hero-stat strong{
+      display:block;
+      font-size:32px;
+      line-height:1;
+      color:#d47667;
+    }
+
+    .hero-stat span{
+      display:block;
+      margin-top:7px;
+      font-weight:800;
+      color:var(--brown-2);
+    }
+
+    /* ---------- Section ---------- */
+    .section{
+      padding:18px 0 44px;
+      scroll-margin-top:96px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:22px;
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      margin:0;
+      font-size:clamp(25px,3vw,36px);
+      line-height:1.25;
+    }
+
+    .section-desc{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .mini-note{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff2e7;
+      border:1px solid #f2d3bf;
+      color:#99604a;
+      font-size:13px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    /* ---------- Tool cards ---------- */
+    .tools-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .tool-card{
+      --accent:#f5b5a8;
+      --accent-soft:#fff1ed;
+      position:relative;
+      display:grid;
+      grid-template-columns:124px minmax(0,1fr);
+      gap:20px;
+      padding:22px;
+      border-radius:var(--radius-lg);
+      border:1px solid var(--line);
+      background:rgba(255,254,251,.94);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+
+    .tool-card::after{
+      content:"";
+      position:absolute;
+      width:130px;
+      height:130px;
+      right:-60px;
+      bottom:-60px;
+      border-radius:50%;
+      background:var(--accent-soft);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .tool-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 16px 34px rgba(116,78,49,.14);
+    }
+
+    .tool-card.doc{--accent:#8ebca3;--accent-soft:#edf8f0}
+    .tool-card.photo{--accent:#ee9c9c;--accent-soft:#fff0f1}
+    .tool-card.pdf{--accent:#82b7d3;--accent-soft:#eef7fb}
+    .tool-card.kids{--accent:#e7ad4e;--accent-soft:#fff7e6}
+    .tool-card.chart{--accent:#a98ac8;--accent-soft:#f6effb}
+    .tool-card.flow{--accent:#6faaa5;--accent-soft:#edf8f6}
+
+    .tool-visual{
+      position:relative;
+      display:grid;
+      place-items:center;
+      min-height:166px;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at 30% 20%,rgba(255,255,255,.9),transparent 32%),
+        var(--accent-soft);
+      border:1px dashed color-mix(in srgb,var(--accent) 55%,white);
+      font-size:66px;
+      isolation:isolate;
+    }
+
+    .tool-visual .mini-paw{
+      position:absolute;
+      right:10px;
+      bottom:7px;
+      font-size:20px;
+      opacity:.65;
+    }
+
+    .tool-content{
+      position:relative;
+      z-index:2;
+      min-width:0;
+    }
+
+    .tool-top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:8px;
+    }
+
+    .tool-badge{
+      display:grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      border-radius:50%;
+      background:var(--accent);
+      color:white;
+      font-weight:900;
+      box-shadow:inset 0 -2px 0 rgba(0,0,0,.06);
+    }
+
+    .tool-title{
+      margin:0;
+      font-size:22px;
+      line-height:1.3;
+    }
+
+    .tool-url{
+      display:block;
+      width:100%;
+      margin:10px 0 12px;
+      padding:10px 12px;
+      overflow-wrap:anywhere;
+      border-radius:14px;
+      border:1px dashed color-mix(in srgb,var(--accent) 75%,white);
+      background:color-mix(in srgb,var(--accent-soft) 76%,white);
+      text-decoration:none;
+      color:#6e5f56;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .feature-list{
+      display:grid;
+      gap:5px;
+      margin:0 0 16px;
+      padding:0;
+      list-style:none;
+      color:#6b5a50;
+      font-size:14px;
+    }
+
+    .feature-list li{
+      position:relative;
+      padding-left:22px;
+    }
+
+    .feature-list li::before{
+      content:"🐾";
+      position:absolute;
+      left:0;
+      top:0;
+      font-size:12px;
+    }
+
+    .tool-actions{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      min-height:42px;
+      padding:9px 15px;
+      border-radius:14px;
+      border:1px solid transparent;
+      text-decoration:none;
+      font-weight:900;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      box-shadow:0 7px 16px color-mix(in srgb,var(--accent) 34%,transparent);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible{
+      transform:translateY(-1px);
+      filter:saturate(1.05);
+      outline:none;
+    }
+
+    .btn-soft{
+      background:#fff;
+      color:#735848;
+      border-color:#ead6c4;
+    }
+/* ---------- Source ---------- */
+    .source-box{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:20px;
+      padding:28px;
+      border-radius:28px;
+      border:1px dashed #e5b99d;
+      background:
+        radial-gradient(circle at 0 100%,rgba(247,197,202,.25),transparent 25%),
+        radial-gradient(circle at 100% 10%,rgba(188,218,200,.25),transparent 24%),
+        #fff8ed;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .source-box h2{
+      margin:0;
+      font-size:28px;
+    }
+
+    .source-box p{
+      margin:7px 0 0;
+      color:var(--muted);
+    }
+
+    .source-link{
+      margin-top:14px;
+      display:inline-flex;
+      align-items:center;
+      max-width:100%;
+      padding:11px 14px;
+      border-radius:14px;
+      background:#fffdf9;
+      border:1px dashed #b9a18f;
+      color:#5e765f;
+      text-decoration:none;
+      font-weight:900;
+      overflow-wrap:anywhere;
+    }
+
+    .github-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:170px;
+      min-height:50px;
+      padding:12px 18px;
+      border-radius:17px;
+      background:#5b3928;
+      color:white;
+      text-decoration:none;
+      font-weight:900;
+      box-shadow:0 10px 24px rgba(91,57,40,.2);
+    }
+
+
+    /* ---------- Visitor counter ---------- */
+    .visitor-counter{
+      margin:0 auto 18px;
+      width:min(calc(100% - 28px),var(--max));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .visitor-card{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      min-height:58px;
+      padding:12px 18px;
+      border:1px solid #efd9c3;
+      border-radius:20px;
+      background:rgba(255,254,251,.92);
+      box-shadow:var(--shadow-soft);
+      color:#7a513c;
+      font-weight:900;
+    }
+
+    .visitor-label{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      white-space:nowrap;
+    }
+
+    .visitor-badge{
+      display:block;
+      height:28px;
+      max-width:100%;
+    }
+
+    .visitor-note{
+      width:100%;
+      margin-top:-3px;
+      color:#a08774;
+      text-align:center;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    /* ---------- Footer ---------- */
+    footer{
+      padding:8px 0 34px;
+      color:#947a67;
+      text-align:center;
+      font-size:13px;
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width:850px){
+      .site-header{position:static}
+      .nav{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:8px;
+      }
+      .nav-links{
+        width:100%;
+        justify-content:flex-start;
+        overflow:auto;
+        flex-wrap:nowrap;
+        padding-bottom:2px;
+      }
+      .nav-links a{white-space:nowrap}
+
+      .hero-copy{
+        grid-template-columns:1fr;
+        padding:20px;
+      }
+
+      .hero-stat{
+        width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:10px;
+      }
+      .hero-stat strong{font-size:27px}
+      .hero-stat span{margin-top:0}
+
+      .section-head{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .tools-grid{
+        grid-template-columns:1fr;
+      }
+
+
+      .tool-card{
+        grid-template-columns:100px minmax(0,1fr);
+      }
+
+      .tool-visual{
+        min-height:145px;
+        font-size:54px;
+      }
+
+      .source-box{
+        grid-template-columns:1fr;
+      }
+
+      .github-button{
+        width:100%;
+      }
+    }
+
+    @media (max-width:560px){
+      .shell{width:min(calc(100% - 18px),var(--max))}
+      .site-header{padding-top:8px}
+
+      .brand-text{font-size:16px}
+      .hero-card{border-radius:24px}
+      .hero-image{
+        aspect-ratio:3/1.25;
+        object-fit:cover;
+      }
+
+      .tool-card{
+        grid-template-columns:1fr;
+        padding:17px;
+      }
+
+      .tool-visual{
+        min-height:122px;
+      }
+
+      .tool-title{
+        font-size:20px;
+      }
+
+      .source-box{
+        padding:22px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;transition:none!important}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <nav class="nav" aria-label="主要導覽">
+        <a class="brand" href="#top" aria-label="回到首頁">
+          <span class="brand-paw" aria-hidden="true">🐾</span>
+          <span class="brand-text">CHOPPER 網頁工具作品集</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#top">首頁</a>
+          <a href="#tools">作品工具</a>
+          <a href="#source">程式碼來源</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-card">
+          <img
+            class="hero-image"
+            src="assets/chopper-cat-hero.png"
+            alt="CHOPPER 網頁工具作品集，貓貓風格的文件、照片、PDF 與學習工具插圖"
+          >
+
+          <div class="hero-copy">
+            <div>
+              <p class="eyebrow">🐱 CHOPPER WEB TOOLS</p>
+              <h1>CHOPPER 網頁工具作品集</h1>
+              <p>
+                把日常工作、文件整理、照片紀錄、PDF 編輯、學習練習與數據分析，
+                做成打開瀏覽器就能使用的實用小工具。
+              </p>
+            </div>
+
+            <div class="hero-stat" aria-label="目前收錄作品數">
+              <strong>6</strong>
+              <span>個網頁工具</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">作品工具 🐾</h2>
+            <p class="section-desc">點選卡片中的「前往網站」，即可直接開啟使用。</p>
+          </div>
+          <span class="mini-note">✨ 持續新增中</span>
+        </div>
+
+        <div class="tools-grid">
+
+          <!-- 01 -->
+          <article class="tool-card doc">
+            <div class="tool-visual" aria-hidden="true">
+              📄
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">A</span>
+                <h3 class="tool-title">批次文件文字取代工具</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/BatchDocumentTextReplacer/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/BatchDocumentTextReplacer/
+              </a>
+
+              <ul class="feature-list">
+                <li>一次處理多份文件，批次執行文字取代</li>
+                <li>支援 Word、Excel、PowerPoint、文字與多種文件格式</li>
+                <li>可先掃描、預覽修改位置，再決定是否輸出</li>
+                <li>保留原始檔，適合年度、姓名、單位名稱等大量更新</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/BatchDocumentTextReplacer/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="tool-card photo">
+            <div class="tool-visual" aria-hidden="true">
+              📷
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">B</span>
+                <h3 class="tool-title">圖片紀錄整理助手</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/ImageRecordAssistant/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/ImageRecordAssistant/
+              </a>
+
+              <ul class="feature-list">
+                <li>一次匯入大量照片並逐張整理照片說明與地點</li>
+                <li>支援圖片旋轉、裁切、批次命名與專案管理</li>
+                <li>可輸出 Word、PDF，適合活動與工程紀錄整理</li>
+                <li>支援 HEIC 與完整專案備份，方便大量照片作業</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/ImageRecordAssistant/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="tool-card pdf">
+            <div class="tool-visual" aria-hidden="true">
+              📑
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">C</span>
+                <h3 class="tool-title">PDF Editor Web</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/PDFEditor/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/PDFEditor/
+              </a>
+
+              <ul class="feature-list">
+                <li>直接在瀏覽器進行 PDF 編輯與頁面整理</li>
+                <li>支援文字、色塊、標註、永久塗銷與插入圖片</li>
+                <li>可合併 PDF、加入頁碼、浮水印與調整頁面順序</li>
+                <li>以本機處理為主，適合日常快速文件處理</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/PDFEditor/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="tool-card kids">
+            <div class="tool-visual" aria-hidden="true">
+              ✏️
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">D</span>
+                <h3 class="tool-title">兒童書寫練習產生器</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/KidsWritingPractice/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/KidsWritingPractice/
+              </a>
+
+              <ul class="feature-list">
+                <li>英文、注音、國字、數字與加減法練習</li>
+                <li>支援平板直接手寫與兒童操作模式</li>
+                <li>可產生 A4 書寫練習紙與多種格線</li>
+                <li>包含水果認知、學習任務、紀錄與備份功能</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/KidsWritingPractice/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="tool-card chart">
+            <div class="tool-visual" aria-hidden="true">
+              📊
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">E</span>
+                <h3 class="tool-title">數據圖表產生器</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/ChartGenerator/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/ChartGenerator/
+              </a>
+
+              <ul class="feature-list">
+                <li>匯入資料後，以拖拉方式快速建立統計圖表</li>
+                <li>支援數值與文字分類統計，適合南區、北區等類別資料</li>
+                <li>滑鼠移到圖表上可顯示目前統計欄位與計算方式</li>
+                <li>可修改 X／Y 軸標題，並將資料與圖表一起匯出 Excel</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/ChartGenerator/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="tool-card flow">
+            <div class="tool-visual" aria-hidden="true">
+              🔀
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">F</span>
+                <h3 class="tool-title">智慧流程圖產生器</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/SmartFlowGenerator/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/SmartFlowGenerator/
+              </a>
+
+              <ul class="feature-list">
+                <li>快速建立與編輯流程圖，支援多種節點與流程配置</li>
+                <li>節點可拖曳、雙擊編輯，並支援滾輪縮放畫布</li>
+                <li>內建多組範例，可快速套用後再自行修改</li>
+                <li>支援 SVG、PNG、JSON，以及單頁／多頁 PDF 匯出</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/SmartFlowGenerator/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="source">
+      <div class="shell">
+        <div class="source-box">
+          <div>
+            <h2>🐱 程式碼來源</h2>
+            <p>更多作品、原始碼與後續更新，可以從 CHOPPER 的 GitHub 查看。</p>
+
+            <a class="source-link"
+               href="https://github.com/chopper-coder"
+               target="_blank" rel="noopener noreferrer">
+              https://github.com/chopper-coder
+            </a>
+          </div>
+
+          <a class="github-button"
+             href="https://github.com/chopper-coder"
+             target="_blank" rel="noopener noreferrer">
+            前往 GitHub 🐾
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <section class="visitor-counter" aria-label="網站瀏覽人次">
+    <div class="visitor-card">
+      <span class="visitor-label">🐾 瀏覽人次</span>
+      <img
+        id="visitorCounter"
+        class="visitor-badge"
+        alt="網站瀏覽人次計數器"
+        loading="eager"
+      >
+      <div class="visitor-note">每次開啟網站會累計一次瀏覽紀錄</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">
+      用心製作每一個小工具，讓工作與學習更輕鬆可愛。 🐾
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const counter = document.getElementById("visitorCounter");
+      if (!counter) return;
+
+      // 依實際部署網址自動建立獨立計數器，因此 GitHub Repository 改名也不必修改程式。
+      const rawKey = `${location.host}${location.pathname}`
+        .replace(/\/index\.html?$/i, "/")
+        .replace(/\/+$/, "");
+
+      const counterKey = rawKey || "chopper-web-tools-portfolio";
+
+      const params = new URLSearchParams({
+        view: "total",
+        style: "flat-square",
+        label: "總瀏覽",
+        color: "d98d7b",
+        labelColor: "7a513c"
+      });
+
+      counter.src =
+        `https://hits.sh/${encodeURI(counterKey)}.svg?${params.toString()}`;
+    })();
+  </script>
+
+</body>
+</html>
