@@ -493,41 +493,97 @@
     }
 
     .visitor-card{
+      width:min(100%,620px);
+      padding:22px;
+      border:1px solid #efd9c3;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(247,197,202,.18),transparent 30%),
+        rgba(255,254,251,.96);
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+    }
+
+    .visitor-title{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-      min-height:58px;
-      padding:12px 18px;
-      border:1px solid #efd9c3;
-      border-radius:20px;
-      background:rgba(255,254,251,.92);
-      box-shadow:var(--shadow-soft);
+      gap:8px;
+      margin-bottom:12px;
       color:#7a513c;
+      font-size:18px;
       font-weight:900;
     }
 
-    .visitor-label{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      white-space:nowrap;
+    .visitor-number-wrap{
+      display:flex;
+      align-items:baseline;
+      justify-content:center;
+      gap:8px;
+      margin:4px 0 14px;
     }
 
-    .visitor-badge{
+    .visitor-number{
+      min-width:72px;
+      color:#d47f70;
+      font-size:42px;
+      line-height:1;
+      font-weight:1000;
+      letter-spacing:.02em;
+      font-variant-numeric:tabular-nums;
+    }
+
+    .visitor-unit{
+      color:#8a6c59;
+      font-size:15px;
+      font-weight:900;
+    }
+
+    .visitor-history{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .visitor-history-item{
+      padding:11px 12px;
+      border-radius:15px;
+      background:#fffaf4;
+      border:1px solid #f0dfcf;
+    }
+
+    .visitor-history-item span{
       display:block;
-      height:28px;
-      max-width:100%;
+      color:#a08774;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .visitor-history-item strong{
+      display:block;
+      margin-top:3px;
+      color:#6e5b4f;
+      font-size:13px;
+      font-weight:900;
+      overflow-wrap:anywhere;
     }
 
     .visitor-note{
-      width:100%;
-      margin-top:-3px;
+      margin-top:12px;
       color:#a08774;
-      text-align:center;
       font-size:11px;
       font-weight:700;
+    }
+
+    @media (max-width:560px){
+      .visitor-history{
+        grid-template-columns:1fr;
+      }
+
+      .visitor-number{
+        font-size:36px;
+      }
     }
 
     /* ---------- Footer ---------- */
@@ -645,6 +701,7 @@
         <div class="nav-links">
           <a href="#top">首頁</a>
           <a href="#tools">作品工具</a>
+          <a href="#privacy">隱私與開源</a>
           <a href="#source">程式碼來源</a>
         </div>
       </nav>
@@ -912,6 +969,47 @@
       </div>
     </section>
 
+
+    <section class="section" id="privacy">
+      <div class="shell">
+        <div class="privacy-box">
+          <div class="privacy-icon" aria-hidden="true">🔒</div>
+
+          <div>
+            <h2>文件不會上傳到伺服器 🐾</h2>
+            <p>
+              本作品集中的文件處理工具以瀏覽器本機處理為主，
+              你的文件不需要上傳到我的伺服器即可使用。
+              如果你希望完全自行管理，也可以從 GitHub 下載程式碼，
+              放到自己的電腦、內部網路或自己的網站上使用。
+            </p>
+
+            <div class="privacy-points">
+              <div class="privacy-point">
+                <span>🖥️</span>
+                <span>文件在瀏覽器本機處理，不需先上傳到我的伺服器。</span>
+              </div>
+
+              <div class="privacy-point">
+                <span>📦</span>
+                <span>可下載原始程式碼，自行部署、備份或離線使用。</span>
+              </div>
+
+              <div class="privacy-point">
+                <span>🔍</span>
+                <span>程式碼公開，可自行檢視實際運作方式。</span>
+              </div>
+
+              <div class="privacy-point">
+                <span>🐱</span>
+                <span>不想連線到作品網站，也可以自己架一份來使用。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="source">
       <div class="shell">
         <div class="source-box">
@@ -937,16 +1035,30 @@
   </main>
 
 
-  <section class="visitor-counter" aria-label="網站瀏覽人次">
+  <section class="visitor-counter" aria-label="本裝置瀏覽紀錄">
     <div class="visitor-card">
-      <span class="visitor-label">🐾 瀏覽人次</span>
-      <img
-        id="visitorCounter"
-        class="visitor-badge"
-        alt="網站瀏覽人次計數器"
-        loading="eager"
-      >
-      <div class="visitor-note">每次開啟網站會累計一次瀏覽紀錄</div>
+      <div class="visitor-title">🐾 瀏覽紀錄</div>
+
+      <div class="visitor-number-wrap">
+        <span id="visitorCount" class="visitor-number">1</span>
+        <span class="visitor-unit">次</span>
+      </div>
+
+      <div class="visitor-history">
+        <div class="visitor-history-item">
+          <span>首次瀏覽</span>
+          <strong id="visitorFirst">—</strong>
+        </div>
+
+        <div class="visitor-history-item">
+          <span>最近瀏覽</span>
+          <strong id="visitorLast">—</strong>
+        </div>
+      </div>
+
+      <div class="visitor-note">
+        此紀錄只儲存在目前瀏覽器，不會上傳到任何伺服器。
+      </div>
     </div>
   </section>
 
@@ -956,28 +1068,57 @@
     </div>
   </footer>
 
-  <script>
+    <script>
     (() => {
-      const counter = document.getElementById("visitorCounter");
-      if (!counter) return;
+      const countEl = document.getElementById("visitorCount");
+      const firstEl = document.getElementById("visitorFirst");
+      const lastEl = document.getElementById("visitorLast");
+      if (!countEl || !firstEl || !lastEl) return;
 
-      // 依實際部署網址自動建立獨立計數器，因此 GitHub Repository 改名也不必修改程式。
-      const rawKey = `${location.host}${location.pathname}`
-        .replace(/\/index\.html?$/i, "/")
-        .replace(/\/+$/, "");
+      const COUNT_KEY = "chopper_portfolio_visit_count_v1";
+      const FIRST_KEY = "chopper_portfolio_first_visit_v1";
+      const LAST_KEY = "chopper_portfolio_last_visit_v1";
 
-      const counterKey = rawKey || "chopper-web-tools-portfolio";
+      const formatDateTime = (iso) => {
+        if (!iso) return "—";
+        const date = new Date(iso);
+        if (Number.isNaN(date.getTime())) return "—";
+        return new Intl.DateTimeFormat("zh-TW", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).format(date);
+      };
 
-      const params = new URLSearchParams({
-        view: "total",
-        style: "flat-square",
-        label: "總瀏覽",
-        color: "d98d7b",
-        labelColor: "7a513c"
-      });
+      try {
+        const now = new Date().toISOString();
 
-      counter.src =
-        `https://hits.sh/${encodeURI(counterKey)}.svg?${params.toString()}`;
+        let count = Number.parseInt(localStorage.getItem(COUNT_KEY) || "0", 10);
+        if (!Number.isFinite(count) || count < 0) count = 0;
+        count += 1;
+
+        let firstVisit = localStorage.getItem(FIRST_KEY);
+        if (!firstVisit) {
+          firstVisit = now;
+          localStorage.setItem(FIRST_KEY, firstVisit);
+        }
+
+        localStorage.setItem(COUNT_KEY, String(count));
+        localStorage.setItem(LAST_KEY, now);
+
+        countEl.textContent = count.toLocaleString("zh-TW");
+        firstEl.textContent = formatDateTime(firstVisit);
+        lastEl.textContent = formatDateTime(now);
+      } catch (error) {
+        // 即使瀏覽器禁用儲存功能，頁面仍可正常使用。
+        countEl.textContent = "—";
+        firstEl.textContent = "瀏覽器未允許本機儲存";
+        lastEl.textContent = "瀏覽器未允許本機儲存";
+      }
     })();
   </script>
 
