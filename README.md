@@ -1,6 +1,6 @@
 # CHOPPER 網頁工具作品集
 
-一個以貓貓可愛風格整理的 GitHub Pages 作品首頁。
+GitHub Pages 作品首頁，整理 CHOPPER 製作的實用網頁工具。
 
 ## 收錄工具
 
@@ -11,26 +11,27 @@
 - 數據圖表產生器
 - 智慧流程圖產生器
 - 桌上立牌產生器
+- 套印合併列印工具
 
-## 部署
+## 隱私與自行部署
 
-將本專案全部檔案上傳至 GitHub Repository，並在：
+文件處理工具以瀏覽器本機處理為主，文件不需要先上傳到 CHOPPER 的伺服器。
+原始碼可從 GitHub 下載，自行部署、備份或使用。
 
-`Settings → Pages`
+## 網站分析
 
-設定從主要分支部署即可。
+正式 GitHub Pages 網址會載入 Cloudflare Web Analytics。
+在本機、ChatGPT 預覽或其他非正式網址不會載入 Analytics，
+避免預覽環境出現外部網路存取提示。
+
+## 效能優化
+
+首頁主視覺改用 responsive WebP：
+- chopper-cat-hero-960.webp
+- chopper-cat-hero-1920.webp
+
+並加入 responsive preload、fetchpriority、固定圖片尺寸，改善 LCP。
 
 ## 程式碼來源
 
 https://github.com/chopper-coder
-
-
-
-## 隱私與自行部署
-
-本作品集中的文件處理工具以瀏覽器本機處理為主，文件不需要上傳到我的伺服器。
-使用者也可以從 GitHub 下載原始碼，自行部署、備份或離線使用。
-
-## 網站瀏覽統計
-
-已整合 Cloudflare Web Analytics，用於統計網站 Page Views；前台不顯示計數器。

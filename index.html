@@ -293,11 +293,7 @@
     .tool-card.chart{--accent:#a98ac8;--accent-soft:#f6effb}
     .tool-card.flow{--accent:#6faaa5;--accent-soft:#edf8f6}
     .tool-card.tent{--accent:#d79a74;--accent-soft:#fff3ea}
-
-    .tool-card.featured{
-      grid-column:1 / -1;
-      grid-template-columns:170px minmax(0,1fr);
-    }
+    .tool-card.print{--accent:#718fb8;--accent-soft:#eef4fb}
 
     .tool-visual{
       position:relative;
@@ -541,11 +537,6 @@
         grid-template-columns:100px minmax(0,1fr);
       }
 
-      .tool-card.featured{
-        grid-column:auto;
-        grid-template-columns:100px minmax(0,1fr);
-      }
-
       .tool-visual{
         min-height:145px;
         font-size:54px;
@@ -576,10 +567,6 @@
         padding:17px;
       }
 
-      .tool-card.featured{
-        grid-template-columns:1fr;
-      }
-
       .tool-visual{
         min-height:122px;
       }
@@ -597,6 +584,16 @@
       *{scroll-behavior:auto!important;transition:none!important}
     }
   </style>
+  <link
+    rel="preload"
+    as="image"
+    href="assets/chopper-cat-hero-1920.webp"
+    imagesrcset="assets/chopper-cat-hero-960.webp 960w, assets/chopper-cat-hero-1920.webp 1920w"
+    imagesizes="(max-width: 1180px) calc(100vw - 28px), 1180px"
+    type="image/webp"
+    fetchpriority="high"
+  >
+
 </head>
 
 <body>
@@ -624,7 +621,14 @@
         <div class="hero-card">
           <img
             class="hero-image"
-            src="assets/chopper-cat-hero.png"
+            src="assets/chopper-cat-hero-1920.webp"
+            srcset="assets/chopper-cat-hero-960.webp 960w,
+                    assets/chopper-cat-hero-1920.webp 1920w"
+            sizes="(max-width: 1180px) calc(100vw - 28px), 1180px"
+            width="2172"
+            height="724"
+            fetchpriority="high"
+            decoding="async"
             alt="CHOPPER 網頁工具作品集，貓貓風格的文件、照片、PDF 與學習工具插圖"
           >
 
@@ -639,7 +643,7 @@
             </div>
 
             <div class="hero-stat" aria-label="目前收錄作品數">
-              <strong>7</strong>
+              <strong>8</strong>
               <span>個網頁工具</span>
             </div>
           </div>
@@ -876,7 +880,7 @@
           </article>
 
           <!-- 07 -->
-          <article class="tool-card tent featured">
+          <article class="tool-card tent">
             <div class="tool-visual" aria-hidden="true">
               🪧
               <span class="mini-paw">🐾</span>
@@ -904,6 +908,42 @@
               <div class="tool-actions">
                 <a class="btn btn-primary"
                    href="https://chopper-coder.github.io/TableTentCardGenerator/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 08 -->
+          <article class="tool-card print">
+            <div class="tool-visual" aria-hidden="true">
+              🖨️
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">H</span>
+                <h3 class="tool-title">套印合併列印工具</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/MergePrintTool/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/MergePrintTool/
+              </a>
+
+              <ul class="feature-list">
+                <li>將名單資料快速套入固定列印版面，減少重複輸入</li>
+                <li>支援批次、勾選與指定資料列進行列印</li>
+                <li>文字可依空間自動縮小，降低內容超出版面的情況</li>
+                <li>可直接產生 PDF，適合郵寄、名單與各式套印作業</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/MergePrintTool/"
                    target="_blank" rel="noopener noreferrer">
                   前往網站 🐾
                 </a>
@@ -983,10 +1023,37 @@
       用心製作每一個小工具，讓工作與學習更輕鬆可愛。 🐾
     </div>
   </footer>
-  <!-- Cloudflare Web Analytics -->
-  <script type="module"
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token":"6cbc6cb7f65642c0b008bdb0d474bb3e"}'></script>
+  <!-- Cloudflare Web Analytics：只在正式 GitHub Pages 網址載入 -->
+  <script>
+    (() => {
+      const isProduction =
+        location.hostname === "chopper-coder.github.io" &&
+        location.pathname.startsWith("/CHOPPER-Web-Tools/");
+
+      if (!isProduction) return;
+
+      const loadAnalytics = () => {
+        if (document.querySelector('script[data-chopper-cf-analytics]')) return;
+
+        const script = document.createElement("script");
+        script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+        script.defer = true;
+        script.dataset.chopperCfAnalytics = "1";
+        script.dataset.cfBeacon = JSON.stringify({
+          token: "6cbc6cb7f65642c0b008bdb0d474bb3e"
+        });
+        document.body.appendChild(script);
+      };
+
+      window.addEventListener("load", () => {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadAnalytics, { timeout: 3000 });
+        } else {
+          setTimeout(loadAnalytics, 1200);
+        }
+      }, { once: true });
+    })();
+  </script>
   <!-- End Cloudflare Web Analytics -->
 
 </body>
