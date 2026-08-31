@@ -135,8 +135,10 @@
     }
 
     .hero-card{
+      width:min(100%,980px);
+      margin-inline:auto;
       overflow:hidden;
-      border-radius:32px;
+      border-radius:28px;
       border:1px solid var(--line);
       background:var(--paper);
       box-shadow:var(--shadow);
@@ -144,8 +146,9 @@
 
     .hero-image{
       width:100%;
+      height:auto;
       aspect-ratio:3/1;
-      object-fit:cover;
+      object-fit:contain;
       background:#fff6ec;
     }
 
@@ -154,7 +157,7 @@
       grid-template-columns:1fr auto;
       gap:24px;
       align-items:center;
-      padding:24px 28px 26px;
+      padding:20px 24px 22px;
       background:
         radial-gradient(circle at right top,rgba(188,218,200,.20),transparent 35%),
         linear-gradient(180deg,#fffefb,#fff9f1);
@@ -556,10 +559,15 @@
       .site-header{padding-top:8px}
 
       .brand-text{font-size:16px}
-      .hero-card{border-radius:24px}
+      .hero-card{
+        width:100%;
+        border-radius:22px;
+      }
       .hero-image{
-        aspect-ratio:3/1.25;
-        object-fit:cover;
+        width:100%;
+        height:auto;
+        aspect-ratio:3/1;
+        object-fit:contain;
       }
 
       .tool-card{
@@ -589,7 +597,7 @@
     as="image"
     href="assets/chopper-cat-hero-1920.webp"
     imagesrcset="assets/chopper-cat-hero-960.webp 960w, assets/chopper-cat-hero-1920.webp 1920w"
-    imagesizes="(max-width: 1180px) calc(100vw - 28px), 1180px"
+    imagesizes="(max-width: 980px) calc(100vw - 28px), 980px"
     type="image/webp"
     fetchpriority="high"
   >
@@ -624,7 +632,7 @@
             src="assets/chopper-cat-hero-1920.webp"
             srcset="assets/chopper-cat-hero-960.webp 960w,
                     assets/chopper-cat-hero-1920.webp 1920w"
-            sizes="(max-width: 1180px) calc(100vw - 28px), 1180px"
+            sizes="(max-width: 980px) calc(100vw - 28px), 980px"
             width="2172"
             height="724"
             fetchpriority="high"
