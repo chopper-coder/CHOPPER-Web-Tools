@@ -4,6 +4,8 @@ GitHub Pages 作品首頁，整理 CHOPPER 製作的實用網頁工具。
 
 ## 收錄工具
 
+- WorkMate Tools｜辦公工作小幫手
+
 - 批次文件文字取代工具
 - 圖片紀錄整理助手
 - PDF Editor Web

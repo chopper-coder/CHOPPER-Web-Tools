@@ -297,6 +297,13 @@
     .tool-card.flow{--accent:#6faaa5;--accent-soft:#edf8f6}
     .tool-card.tent{--accent:#d79a74;--accent-soft:#fff3ea}
     .tool-card.print{--accent:#718fb8;--accent-soft:#eef4fb}
+    .tool-card.workmate{--accent:#739b8f;--accent-soft:#eef8f5}
+
+    .tool-card.featured{
+      grid-column:1 / -1;
+      grid-template-columns:170px minmax(0,1fr);
+      border-width:1.5px;
+    }
 
     .tool-visual{
       position:relative;
@@ -540,6 +547,11 @@
         grid-template-columns:100px minmax(0,1fr);
       }
 
+      .tool-card.featured{
+        grid-column:auto;
+        grid-template-columns:100px minmax(0,1fr);
+      }
+
       .tool-visual{
         min-height:145px;
         font-size:54px;
@@ -573,6 +585,10 @@
       .tool-card{
         grid-template-columns:1fr;
         padding:17px;
+      }
+
+      .tool-card.featured{
+        grid-template-columns:1fr;
       }
 
       .tool-visual{
@@ -651,7 +667,7 @@
             </div>
 
             <div class="hero-stat" aria-label="目前收錄作品數">
-              <strong>8</strong>
+              <strong>9</strong>
               <span>個網頁工具</span>
             </div>
           </div>
@@ -672,6 +688,43 @@
         <div class="tools-grid">
 
           <!-- 01 -->
+          <article class="tool-card workmate featured">
+            <div class="tool-visual" aria-hidden="true">
+              🧰
+              <span class="mini-paw">🐾</span>
+            </div>
+
+            <div class="tool-content">
+              <div class="tool-top">
+                <span class="tool-badge">A</span>
+                <h3 class="tool-title">WorkMate Tools｜辦公工作小幫手</h3>
+              </div>
+
+              <a class="tool-url"
+                 href="https://chopper-coder.github.io/WorkMate-Tools/"
+                 target="_blank" rel="noopener noreferrer">
+                https://chopper-coder.github.io/WorkMate-Tools/
+              </a>
+
+              <ul class="feature-list">
+                <li>把多種日常辦公小工具集中在同一個網頁中，減少來回切換不同程式</li>
+                <li>包含檔案整理、文件比對、Excel 資料處理與常用文字處理等功能</li>
+                <li>提供預覽、檢查與輸出流程，適合日常大量重複性工作</li>
+                <li>以瀏覽器本機處理為主，方便直接開啟使用，也可自行下載程式碼部署</li>
+              </ul>
+
+              <div class="tool-actions">
+                <a class="btn btn-primary"
+                   href="https://chopper-coder.github.io/WorkMate-Tools/"
+                   target="_blank" rel="noopener noreferrer">
+                  前往網站 🐾
+                </a>
+              </div>
+            </div>
+          </article>
+
+
+          <!-- 02 -->
           <article class="tool-card doc">
             <div class="tool-visual" aria-hidden="true">
               📄
@@ -680,7 +733,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">A</span>
+                <span class="tool-badge">B</span>
                 <h3 class="tool-title">批次文件文字取代工具</h3>
               </div>
 
@@ -707,7 +760,7 @@
             </div>
           </article>
 
-          <!-- 02 -->
+          <!-- 03 -->
           <article class="tool-card photo">
             <div class="tool-visual" aria-hidden="true">
               📷
@@ -716,7 +769,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">B</span>
+                <span class="tool-badge">C</span>
                 <h3 class="tool-title">圖片紀錄整理助手</h3>
               </div>
 
@@ -743,7 +796,7 @@
             </div>
           </article>
 
-          <!-- 03 -->
+          <!-- 04 -->
           <article class="tool-card pdf">
             <div class="tool-visual" aria-hidden="true">
               📑
@@ -752,7 +805,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">C</span>
+                <span class="tool-badge">D</span>
                 <h3 class="tool-title">PDF Editor Web</h3>
               </div>
 
@@ -763,10 +816,10 @@
               </a>
 
               <ul class="feature-list">
-                <li>直接在瀏覽器進行 PDF 編輯與頁面整理</li>
-                <li>支援文字、色塊、標註、永久塗銷與插入圖片</li>
-                <li>可合併 PDF、加入頁碼、浮水印與調整頁面順序</li>
-                <li>以本機處理為主，適合日常快速文件處理</li>
+                <li>直接在瀏覽器開啟 PDF，新增文字、色塊與圖片並自由調整位置</li>
+                <li>支援永久塗銷，可將敏感內容真正移除，而不是只在上方蓋色塊</li>
+                <li>可新增、刪除、重新排序與合併頁面，並加入頁碼與浮水印</li>
+                <li>文件以瀏覽器本機處理為主，不需先上傳到我的伺服器</li>
               </ul>
 
               <div class="tool-actions">
@@ -779,7 +832,7 @@
             </div>
           </article>
 
-          <!-- 04 -->
+          <!-- 05 -->
           <article class="tool-card kids">
             <div class="tool-visual" aria-hidden="true">
               ✏️
@@ -788,7 +841,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">D</span>
+                <span class="tool-badge">E</span>
                 <h3 class="tool-title">兒童書寫練習產生器</h3>
               </div>
 
@@ -815,7 +868,7 @@
             </div>
           </article>
 
-          <!-- 05 -->
+          <!-- 06 -->
           <article class="tool-card chart">
             <div class="tool-visual" aria-hidden="true">
               📊
@@ -824,7 +877,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">E</span>
+                <span class="tool-badge">F</span>
                 <h3 class="tool-title">數據圖表產生器</h3>
               </div>
 
@@ -851,7 +904,7 @@
             </div>
           </article>
 
-          <!-- 06 -->
+          <!-- 07 -->
           <article class="tool-card flow">
             <div class="tool-visual" aria-hidden="true">
               🔀
@@ -860,7 +913,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">F</span>
+                <span class="tool-badge">G</span>
                 <h3 class="tool-title">智慧流程圖產生器</h3>
               </div>
 
@@ -887,7 +940,7 @@
             </div>
           </article>
 
-          <!-- 07 -->
+          <!-- 08 -->
           <article class="tool-card tent">
             <div class="tool-visual" aria-hidden="true">
               🪧
@@ -896,7 +949,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">G</span>
+                <span class="tool-badge">H</span>
                 <h3 class="tool-title">桌上立牌產生器</h3>
               </div>
 
@@ -923,7 +976,7 @@
             </div>
           </article>
 
-          <!-- 08 -->
+          <!-- 09 -->
           <article class="tool-card print">
             <div class="tool-visual" aria-hidden="true">
               🖨️
@@ -932,7 +985,7 @@
 
             <div class="tool-content">
               <div class="tool-top">
-                <span class="tool-badge">H</span>
+                <span class="tool-badge">I</span>
                 <h3 class="tool-title">套印合併列印工具</h3>
               </div>
 
